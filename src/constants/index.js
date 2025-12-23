@@ -38,11 +38,12 @@ const cards = [
     img: "/images/shubham.jpg",
     translation: "translate-y-[-5%]",
   },
-  // {
-  //   rotation: "rotate-z-[4deg]",
-  //   name: "Ishika Bhoyar",
-  //   img: "/images/ishika.jpg",
-  // },
+  {
+    rotation: "rotate-z-[4deg]",
+    name: "Swadha Kumari",
+    img: "/images/swadha.jpeg",
+    translation: "translate-y-[-5%]"
+  },
   // {
   //   rotation: "rotate-z-[4deg]",
   //   name: "Manas Kolaskar",
