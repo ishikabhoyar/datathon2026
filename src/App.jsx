@@ -8,6 +8,7 @@ import { useGSAP } from "@gsap/react";
 import NutritionSection from "./sections/NutritionSection";
 import BenefitSection from "./sections/BenefitSection";
 import TestimonialSection from "./sections/TestimonialSection";
+import GallerySection from "./sections/GallerySection";
 import FooterSection from "./sections/FooterSection";
 import TimelineSection from "./sections/TimelineSection";
 
@@ -35,6 +36,7 @@ const App = () => {
           <div>
             <BenefitSection />
             <TestimonialSection />
+            <GallerySection />
           </div>
 
           <FooterSection />

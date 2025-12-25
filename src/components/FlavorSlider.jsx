@@ -68,8 +68,8 @@ const FlavorSlider = () => {
       <div className="flavors">
         {flavorlists.map((flavor, index) => {
           const techImages = [
-            "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=800&fit=crop", // Generative AI
-            "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=800&fit=crop", // Core ML
+            "/images/geniai.jpeg", // Generative AI
+            "/images/coreml.jpeg", // Core ML
             "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=600&h=800&fit=crop", // Pre-trained
             "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=600&h=800&fit=crop", // RAG Fusion
             "https://images.unsplash.com/photo-1555255707-c07966088b7b?w=600&h=800&fit=crop", // Optimization
