@@ -64,7 +64,7 @@ const HeroSection = () => {
     <section className="hero-section">
       {/* Original background image */}
       <img
-        src="/Decoding the Data-upside Down..png"
+        src="https://drive.google.com/file/d/1ZHV54MaiBhbCvxAJMcbTg6v7lfzXvt2L/view?usp=sharing"
         alt="Background"
         className="hero-bg-image"
       />
