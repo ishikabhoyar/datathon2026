@@ -1,42 +1,55 @@
+
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import "./HeroSection.css";
 
 const HeroSection = () => {
   useGSAP(() => {
-    // Smooth fade-in animation on page load
-    gsap.from(".hero-image", {
+    // Logo animations
+    gsap.from(".hero-logo-top-left", {
       opacity: 0,
-      scale: 1.05,
-      duration: 2,
-      ease: "power2.out",
-      delay: 0.2,
+      x: -50,
+      duration: 1.2,
+      ease: "power3.out",
+      delay: 0.3,
     });
 
-    // Fade in hero overlay content
-    gsap.from(".hero-overlay-content", {
+    // SVV logo - no animation, stays visible
+    // gsap.from(".hero-logo-center", {
+    //   opacity: 0,
+    //   scale: 0.8,
+    //   duration: 1.5,
+    //   ease: "power3.out",
+    //   delay: 0.5,
+    // });
+
+    // Content animations
+    gsap.from(".hero-content > *", {
       opacity: 0,
       y: 30,
-      duration: 1.5,
+      duration: 1,
       ease: "power3.out",
-      delay: 0.8,
+      stagger: 0.15,
+      delay: 1,
     });
 
-    // Parallax scroll effect
-    gsap.to(".hero-image", {
-      scrollTrigger: {
-        trigger: ".hero-container",
-        start: "top top",
-        end: "bottom top",
-        scrub: 1,
-      },
-      yPercent: 20,
-      ease: "none",
-    });
+    // Parallax effect on scroll - disabled for SVV logo
+    // gsap.to(".hero-logo-center", {
+    //   scrollTrigger: {
+    //     trigger: ".hero-section",
+    //     start: "top top",
+    //     end: "bottom top",
+    //     scrub: 1,
+    //   },
+    //   y: 100,
+    //   opacity: 0.3,
+    //   ease: "none",
+    // });
 
     // Fade out content on scroll
-    gsap.to(".hero-overlay-content", {
+    gsap.to(".hero-content", {
       scrollTrigger: {
-        trigger: ".hero-container",
+        trigger: ".hero-section",
         start: "top top",
         end: "50% top",
         scrub: 1,
@@ -45,33 +58,62 @@ const HeroSection = () => {
       y: -50,
       ease: "none",
     });
-
-    // Scale container on scroll
-    gsap.to(".hero-container", {
-      scrollTrigger: {
-        trigger: ".hero-container",
-        start: "top top",
-        end: "bottom top",
-        scrub: 1.5,
-      },
-      scale: 0.9,
-      borderRadius: "24px",
-      ease: "power1.inOut",
-    });
   });
 
   return (
-    <section className="bg-black">
-      <div className="hero-container">
-        {/* Hero Background Image */}
-        <img
-          src="/Decoding the Data-upside Down..png"
-          className="hero-image absolute inset-0 w-full h-full object-cover"
-          alt="Decoding the Data - Upside Down"
-        />
+    <section className="hero-section">
+      {/* Original background image */}
+      <img
+        src="/Decoding the Data-upside Down..png"
+        alt="Background"
+        className="hero-bg-image"
+      />
+
+      {/* Background grain effect */}
+      <div className="hero-bg-grain"></div>
+
+      {/* Top-left logo */}
+      <img
+        src="/dzlogo.png"
+        alt="DZ Logo"
+        className="hero-logo-top-left"
+      />
+
+      {/* Center logo */}
+      <img
+        src="/svvlogo.png"
+        alt="SVV Logo"
+        className="hero-logo-center"
+      />
+
+      {/* Vertical dashed line with text */}
+      <div className="hero-divider-wrapper">
+        <div className="hero-divider-line hero-divider-top"></div>
+        <p className="hero-divider-text">DATAZEN PRESENTS</p>
+        <div className="hero-divider-line hero-divider-bottom"></div>
+      </div>
+
+      {/* Content */}
+      <div className="hero-content">
+        <div className="hero-logo-wrapper">
+          <div className="hero-datathon-row">
+            <p className="hero-side-text hero-left-text">
+              7th & 8th <br />
+              February, 2025
+            </p>
+            <h1 className="hero-datathon-text stranger-things-font">DATATHON</h1>
+            <p className="hero-side-text hero-right-text">
+              K J Somaiya School<br />
+              of Engineering
+            </p>
+          </div>
+          <h1 className="hero-year-text stranger-things-font">2026</h1>
+        </div>
+        <h2 className="hero-subtitle">Decoding the Data</h2>
       </div>
     </section>
   );
 };
 
 export default HeroSection;
+
