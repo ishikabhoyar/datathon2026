@@ -1,3 +1,4 @@
+
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { useRef } from "react";
@@ -18,14 +19,14 @@ const GallerySlider = () => {
                 scrollTrigger: {
                     trigger: ".gallery-section",
                     start: "2% top",
-                    end: `+=${scrollAmount + 1500}px`,
+                    end: `+=${scrollAmount}px`,
                     scrub: true,
                     pin: true,
                 },
             });
 
             tl.to(".gallery-section", {
-                x: `-${scrollAmount + 1500}px`,
+                x: `-${scrollAmount}px`,
                 ease: "power1.inOut",
             })
                 .to(".flavors .relative", {

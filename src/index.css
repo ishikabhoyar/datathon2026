@@ -192,7 +192,7 @@ body::-webkit-scrollbar {
   }
 
   .gallery-section {
-    @apply min-h-dvh bg-black;
+    @apply min-h-fit bg-black;
 
     .gallery-text-scroll {
       @apply rotate-[-3deg] md:translate-y-5 border-[.5vw] border-black absolute z-10;
@@ -207,7 +207,7 @@ body::-webkit-scrollbar {
     }
 
     .slider-wrapper {
-      @apply lg:h-dvh min-h-dvh md:min-h-fit w-full mt-0 md:mt-20 xl:mt-0;
+      @apply h-auto md:min-h-fit w-full mt-0 md:mt-20 xl:mt-0;
 
       .flavors {
         @apply h-full w-full flex md:flex-row flex-col items-center 2xl:gap-72 lg:gap-52 md:gap-24 gap-20 flex-nowrap;
@@ -328,7 +328,7 @@ body::-webkit-scrollbar {
   }
 
   .footer-section {
-    @apply 2xl:min-h-dvh overflow-hidden relative bg-[#000000];
+    @apply overflow-hidden relative bg-[#000000];
     box-shadow: inset 0 0 100px rgba(255, 0, 0, 0.2);
 
     .social-btn {
@@ -345,7 +345,7 @@ body::-webkit-scrollbar {
     }
 
     .copyright-box {
-      @apply 2xl:absolute w-full md:px-10 px-5 py-7 bottom-0 text-milk opacity-50 md:text-lg font-paragraph flex gap-7 md:flex-row flex-col-reverse md:justify-between justify-center items-center;
+      @apply w-full md:px-10 px-5 py-7 text-milk opacity-50 md:text-lg font-paragraph flex gap-7 md:flex-row flex-col-reverse md:justify-between justify-center items-center;
 
       p {
         @apply text-center;
