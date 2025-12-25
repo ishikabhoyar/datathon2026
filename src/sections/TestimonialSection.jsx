@@ -1,12 +1,12 @@
-import { useRef } from "react";
+
 import { cards } from "../constants";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 
 const TestimonialSection = () => {
-  const vdRef = useRef([]);
+  
 
-  useGSAP(() => {
+    useGSAP(() => {
     gsap.set(".testimonials-section", {
       marginTop: "-140vh",
     });
@@ -55,16 +55,6 @@ const TestimonialSection = () => {
     });
   });
 
-  const handlePlay = (index) => {
-    const video = vdRef.current[index];
-    video.play();
-  };
-
-  const handlePause = (index) => {
-    const video = vdRef.current[index];
-    video.pause();
-  };
-
   return (
     <section className="testimonials-section">
       <div className="absolute size-full flex flex-col items-center pt-[5vw]">
@@ -78,17 +68,15 @@ const TestimonialSection = () => {
           <div
             key={index}
             className={`vd-card ${card.translation} ${card.rotation}`}
-            onMouseEnter={() => handlePlay(index)}
-            onMouseLeave={() => handlePause(index)}
           >
-            <video
-              ref={(el) => (vdRef.current[index] = el)}
-              src={card.src}
-              playsInline
-              muted
-              loop
+            <img
+              src={card.img}
+              alt={card.name}
               className="size-full object-cover"
             />
+            <div className="absolute bottom-0 left-0 right-0 p-4 text-white text-center bg-black bg-opacity-50">
+              {card.name}
+            </div>
           </div>
         ))}
       </div>
