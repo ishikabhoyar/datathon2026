@@ -43,7 +43,7 @@ const BenefitSection = () => {
   });
 
   return (
-    <section className="benefit-section">
+    <section className="benefit-section" id="prizes">
       {/* Upside Down SVG Pattern */}
       <img 
         src="/images/blue-bg.svg" 
