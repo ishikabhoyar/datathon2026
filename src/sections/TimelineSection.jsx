@@ -156,7 +156,7 @@ const TimelineSection = () => {
     }, []);
 
     return (
-        <div className="timeline-section-container" ref={containerRef}>
+        <div className="timeline-section-container" ref={containerRef} id="timeline">
             {/* Background FX */}
             <div className="bg-grain"></div>
             <div className="fog-layer"></div>

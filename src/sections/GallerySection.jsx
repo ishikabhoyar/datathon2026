@@ -3,7 +3,7 @@ import GalleryTitle from "../components/GalleryTitle";
 
 const GallerySection = () => {
     return (
-        <section className="gallery-section relative">
+        <section className="gallery-section relative" id="gallery">
             {/* Upside Down SVG Background */}
             <img
                 src="/images/black-bg.svg"

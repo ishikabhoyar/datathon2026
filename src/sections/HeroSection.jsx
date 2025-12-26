@@ -61,10 +61,10 @@ const HeroSection = () => {
   });
 
   return (
-    <section className="hero-section">
+    <section className="hero-section" id="home">
       {/* Original background image */}
       <img
-        src="/Decoding the Data-upside Down..png"
+        src="/Decoding the Data-upside Down_1.jpg"
         alt="Background"
         className="hero-bg-image"
       />
@@ -74,14 +74,14 @@ const HeroSection = () => {
 
       {/* Top-left logo */}
       <img
-        src="/dzlogo.png"
-        alt="DZ Logo"
-        className="hero-logo-top-left"
+      // src="/dzlogo.png"
+      // alt="DZ Logo"
+      // className="hero-logo-top-left"
       />
 
       {/* Center logo */}
       <img
-        src="/svvlogo.png"
+        src="/SVV_DZ_logo.png"
         alt="SVV Logo"
         className="hero-logo-center"
       />

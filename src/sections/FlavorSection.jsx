@@ -3,7 +3,7 @@ import FlavorSlider from "../components/FlavorSlider";
 
 const FlavorSection = () => {
   return (
-    <section className="flavor-section relative">
+    <section className="flavor-section relative" id="domains">
       {/* Upside Down SVG Background */}
       <img 
         src="/images/black-bg.svg" 
