@@ -69,6 +69,21 @@
 
 /* --- Layout --- */
 
+/* Headline Style */
+.timeline-header {
+  position: absolute;
+  top: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 3rem;
+  color: #fff;
+  /* Base white, with red shadow from st-font */
+  z-index: 10;
+  pointer-events: none;
+  margin: 0;
+  opacity: 0.9;
+}
+
 /* The moving track */
 .horizontal-track {
   position: absolute;
@@ -224,4 +239,59 @@
   width: 0%;
   z-index: 100;
   box-shadow: 0 0 10px var(--neon-red);
+}
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 768px) {
+
+  /* Headline smaller */
+  .timeline-header {
+    font-size: 2rem;
+    top: 3%;
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Center the Bike */
+  .bicycle-container {
+    left: 50%;
+    /* Center on mobile */
+    /* Maintain transform to center it on the line */
+    /* transform: translate(-50%, -100%); is already set in main class */
+  }
+
+  /* Reduce spacing between nodes */
+  .event-wrapper {
+    width: 300px;
+  }
+
+  /* Fit cards better vertically */
+  .event-card {
+    width: 250px;
+    /* Narrower cards */
+  }
+
+  .event-card h3 {
+    font-size: 1.2rem;
+    /* Tailwind text-2xl is ~1.5rem, scale down */
+  }
+
+  .event-card p {
+    font-size: 0.9rem;
+  }
+
+  /* Bring cards closer to the line so they fit in viewport */
+  .event-wrapper:nth-child(odd) .event-card {
+    bottom: 55%;
+    /* Closer than 60% */
+  }
+
+  .event-wrapper:nth-child(even) .event-card {
+    top: 55%;
+  }
+
+  .timeline-road {
+    /* Maybe make line slightly thinner? */
+    height: 3px;
+  }
 }

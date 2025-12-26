@@ -119,7 +119,8 @@ const TimelineSection = () => {
         const updateNodes = (scrollPos) => {
             const wrappers = track.querySelectorAll('.event-wrapper');
             const viewportWidth = window.innerWidth;
-            const bikePositionPercent = 0.25;
+            // Dynamic bike position matching CSS (50% on mobile, 25% on desktop)
+            const bikePositionPercent = viewportWidth < 768 ? 0.5 : 0.25;
             const bikeScreenX = viewportWidth * bikePositionPercent;
 
             wrappers.forEach(wrapper => {
@@ -160,6 +161,9 @@ const TimelineSection = () => {
             {/* Background FX */}
             <div className="bg-grain"></div>
             <div className="fog-layer"></div>
+
+            {/* Headline */}
+            <h2 className="timeline-header st-font">TIMELINE</h2>
 
             {/* Progress Bar */}
             <div className="progress-bar" id="progress-bar" ref={progressBarRef}></div>
