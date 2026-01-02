@@ -67,7 +67,7 @@ const NutritionSection = () => {
   });
 
   return (
-    <section className="nutrition-section relative overflow-hidden">
+    <section className="nutrition-section relative overflow-hidden hidden md:block">
 
       {/* Stranger Things Upside Down Background */}
       <img
@@ -91,29 +91,30 @@ const NutritionSection = () => {
         alt="accent"
       />
 
-     <div className="relative z-10 flex flex-col md:px-10 px-5 mt-14 md:mt-0">
+      <div className="relative z-10 flex flex-col md:px-10 px-5 mt-14 md:mt-0">
 
         {/* LEFT TITLE */}
         <div className="relative inline-block md:translate-y-20">
           <div className="general-title relative flex flex-col justify-center items-center gap-24">
 
             <div className="overflow-hidden place-self-start">
-              <h1 className="nutrition-title text-white relative z-20 -mb-px flicker-text">Skills that</h1>
+              <h1 className="nutrition-title text-5xl md:text-[8rem] text-white relative z-20 -mb-px flicker-text">Skills that</h1>
             </div>
 
             <div
-            className="nutrition-text-scroll place-self-start opacity-0"
-          >
-            <h2
-              className="
+              className="nutrition-text-scroll place-self-start opacity-0"
+            >
+              <h2
+                className="
+                text-5xl md:text-[6rem]
                 text-red-500
                 drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]
                 drop-shadow-[0_0_16px_rgba(255,0,0,0.6)]
               "
-            >
-              Drive Innovation
-            </h2>
-          </div>
+              >
+                Drive Innovation
+              </h2>
+            </div>
 
 
           </div>
@@ -121,14 +122,14 @@ const NutritionSection = () => {
 
         {/* RIGHT TEXT */}
         <div className="flex md:justify-end items-center -translate-y-14">
-  <div className="md:max-w-sm max-w-lg">
-    <p className="text-xl md:text-2xl md:text-right text-balance font-heading font-semibold text-white leading-relaxed tracking-wide">
-      Master cutting-edge technologies like <span className="text-red-500">Generative AI</span>, 
-      <span className="text-red-500"> Core ML</span>, <span className="text-red-500">RAG Fusion</span>, 
-      and advanced <span className="text-red-500">model optimization</span> techniques.
-    </p>
-  </div>
-</div>
+          <div className="md:max-w-sm max-w-lg">
+            <p className="text-xl md:text-2xl md:text-right text-balance font-heading font-semibold text-white leading-relaxed tracking-wide">
+              Master cutting-edge technologies like <span className="text-red-500">Generative AI</span>,
+              <span className="text-red-500"> Core ML</span>, <span className="text-red-500">RAG Fusion</span>,
+              and advanced <span className="text-red-500">model optimization</span> techniques.
+            </p>
+          </div>
+        </div>
 
 
 

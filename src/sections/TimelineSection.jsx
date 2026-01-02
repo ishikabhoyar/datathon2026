@@ -1,121 +1,86 @@
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import './TimelineSection.css';
 import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const TimelineSection = () => {
     const containerRef = useRef(null);
     const trackRef = useRef(null);
     const progressBarRef = useRef(null);
 
-    // State management using refs to avoid re-renders during animation loop
-    const state = useRef({
-        currentX: 0,
-        targetX: 0,
-        maxScroll: 0,
-        isIntersecting: false
-    });
-
-    useEffect(() => {
-        const container = containerRef.current;
+    useGSAP(() => {
         const track = trackRef.current;
+        const container = containerRef.current;
         const progressBar = progressBarRef.current;
 
-        if (!container || !track || !progressBar) return;
-
-        // Calculate dimensions
-        const updateDimensions = () => {
+        // Calculate scroll amount
+        const getScrollAmount = () => {
             const trackWidth = track.scrollWidth;
             const containerWidth = window.innerWidth;
-            // Total scrollable distance = Track Width - Container Width
-            // If track is smaller than container, maxScroll is 0
-            state.current.maxScroll = Math.max(0, trackWidth - containerWidth);
+            return Math.max(0, trackWidth - containerWidth);
         };
 
-        updateDimensions();
-        window.addEventListener('resize', updateDimensions);
+        const scrollAmount = getScrollAmount();
 
-        // Wheel Event Handler - The Core Logic
-        const handleWheel = (e) => {
-            // If we are scrolling vertically (deltaY)
-            if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+        // --- Main Horizontal Scroll Tween ---
+        const tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: container,
+                start: "top top",
+                end: "+=2500", // Virtual scroll distance
+                pin: true,
+                scrub: 1,
+                invalidateOnRefresh: true, // Recalculate on resize
+                onUpdate: (self) => {
+                    // --- Update Progress Bar ---
+                    if (progressBar) {
+                        progressBar.style.width = `${self.progress * 100}%`;
+                    }
 
-                const delta = e.deltaY;
-                const { targetX, maxScroll } = state.current;
+                    // --- Update Bike Animation ---
+                    const currentX = self.progress * scrollAmount;
 
-                // Check boundaries to determine if we should lock scroll or let it pass
-                const atStart = targetX <= 0;
-                const atEnd = targetX >= maxScroll;
+                    // Wheel Rotation
+                    // Circumference ~ 81px
+                    const rotation = (currentX / 81) * 360;
 
-                // Condition 1: Scrolling down, but not at end -> Scroll Timeline, Prevent Page Scroll
-                if (delta > 0 && !atEnd) {
-                    e.preventDefault();
-                    state.current.targetX = Math.min(maxScroll, targetX + delta);
+                    const rearWheel = container.querySelector('#rear-wheel');
+                    const frontWheel = container.querySelector('#front-wheel');
+
+                    if (rearWheel) {
+                        rearWheel.style.transformOrigin = '20px 45px';
+                        rearWheel.style.transform = `rotate(${rotation}deg)`;
+                    }
+                    if (frontWheel) {
+                        frontWheel.style.transformOrigin = '80px 45px';
+                        frontWheel.style.transform = `rotate(${rotation}deg)`;
+                    }
+
+                    // Body Bounce (Sine wave)
+                    const bounce = Math.sin(currentX / 20) * 1;
+                    const bikeBody = container.querySelector('#bike-body');
+                    if (bikeBody) {
+                        bikeBody.style.transformOrigin = 'bottom center';
+                        bikeBody.style.transform = `translateY(${bounce}px)`;
+                    }
+
+                    // --- Update Active Nodes (Visibility) ---
+                    updateNodes(currentX);
                 }
-                // Condition 2: Scrolling up, but not at start -> Scroll Timeline, Prevent Page Scroll
-                else if (delta < 0 && !atStart) {
-                    e.preventDefault();
-                    state.current.targetX = Math.max(0, targetX + delta);
-                }
-                // Condition 3: At boundaries -> Let page scroll naturally (Do nothing)
             }
-        };
+        });
 
-        // Attach non-passive event listener to allow preventDefault
-        container.addEventListener('wheel', handleWheel, { passive: false });
+        // The horizontal move
+        tl.to(track, {
+            x: () => -getScrollAmount(), // Functional value for responsiveness
+            ease: "none",
+            duration: 1
+        });
 
-        // Animation Loop
-        let animationFrameId;
-
-        const tick = () => {
-            const { currentX, targetX, maxScroll } = state.current;
-
-            // Linear interpolation for smooth inertia: current = current + (target - current) * factor
-            const ease = 0.08;
-            const diff = targetX - currentX;
-
-            // Only update if noticeable difference
-            if (Math.abs(diff) > 0.1) {
-                state.current.currentX = currentX + diff * ease;
-            } else {
-                state.current.currentX = targetX;
-            }
-
-            // Apply transform
-            // We translate LEFT, so negative X
-            track.style.transform = `translateX(${-state.current.currentX}px)`;
-
-            // Update Physics-based Bike Animation
-            // Wheel circumference approx 2 * PI * r (r=13) ~ 81px
-            // Rotation = distance / circumference * 360
-            const rotation = (state.current.currentX / 81) * 360;
-
-            const rearWheel = container.querySelector('#rear-wheel');
-            const frontWheel = container.querySelector('#front-wheel');
-            if (rearWheel) rearWheel.style.transformOrigin = '20px 45px';
-            if (frontWheel) frontWheel.style.transformOrigin = '80px 45px';
-
-            if (rearWheel) rearWheel.style.transform = `rotate(${rotation}deg)`;
-            if (frontWheel) frontWheel.style.transform = `rotate(${rotation}deg)`;
-
-            // Gentle Body Bounce based on distance (Sine wave)
-            // Bounce every 100px
-            const bounce = Math.sin(state.current.currentX / 20) * 1;
-            const bikeBody = container.querySelector('#bike-body');
-            if (bikeBody) {
-                bikeBody.style.transformOrigin = 'bottom center';
-                bikeBody.style.transform = `translateY(${bounce}px)`;
-            }
-
-            // Update Progress Bar
-            const progress = maxScroll > 0 ? state.current.currentX / maxScroll : 0;
-            progressBar.style.width = `${progress * 100}%`;
-
-            // Update Active Nodes
-            updateNodes(state.current.currentX);
-
-            animationFrameId = requestAnimationFrame(tick);
-        };
-
+        // --- Helper: Update Nodes ---
         const updateNodes = (scrollPos) => {
             const wrappers = track.querySelectorAll('.event-wrapper');
             const viewportWidth = window.innerWidth;
@@ -131,7 +96,6 @@ const TimelineSection = () => {
                 const nodeOffsetLeft = wrapper.offsetLeft + (wrapper.offsetWidth / 2);
 
                 // Node's screen position = Node Track Pos - Scroll Pos
-                // (Since track moves left, we subtract scrollPos)
                 const nodeScreenX = nodeOffsetLeft - scrollPos;
 
                 const dist = Math.abs(nodeScreenX - bikeScreenX);
@@ -139,22 +103,11 @@ const TimelineSection = () => {
                 if (dist < 100) {
                     node.classList.add('active');
                     card.classList.add('visible');
-                } else {
-                    // Optional Fade Out
-                    // node.classList.remove('active');
-                    // card.classList.remove('visible');
                 }
             });
         };
 
-        tick();
-
-        return () => {
-            window.removeEventListener('resize', updateDimensions);
-            container.removeEventListener('wheel', handleWheel);
-            cancelAnimationFrame(animationFrameId);
-        };
-    }, []);
+    }, { scope: containerRef }); // Scope to container
 
     return (
         <div className="timeline-section-container" ref={containerRef} id="timeline">
