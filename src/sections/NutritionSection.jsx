@@ -160,8 +160,6 @@ const NutritionSection = () => {
                     {nutrient.label}
                   </p>
 
-                  <p className="font-paragraph text-sm mt-2">up to</p>
-
                   <p className="text-2xl md:text-4xl tracking-tighter font-bold text-white">
                     {nutrient.amount}
                   </p>
