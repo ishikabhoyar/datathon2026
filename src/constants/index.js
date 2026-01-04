@@ -12,8 +12,8 @@ const flavorlists = [
 ];
 
 const nutrientLists = [
-  { label: "Winner Prize", amount: "₹50K" },
-  { label: "Runner-Up", amount: "₹20K" },
+  { label: "Winner Prize", amount: "₹60K" },
+  { label: "Runner-Up", amount: "₹40K" },
   { label: "Duration", amount: "24Hr" },
   { label: "Domains", amount: "2" },
   { label: "Innovation", amount: "MAX" },
