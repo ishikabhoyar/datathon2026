@@ -127,7 +127,7 @@ const HeroSection = () => {
           <div className="hero-datathon-row">
             <p className="hero-side-text hero-left-text">
               7th & 8th <br />
-              February, 2025
+              February, 2026
             </p>
             <h1 className="hero-datathon-text stranger-things-font">DATATHON</h1>
             <p className="hero-side-text hero-right-text">
