@@ -194,7 +194,7 @@ const TimelineSection = () => {
                     <div className="node"></div>
                     <div className="event-card">
                         <h3 className="st-font text-2xl text-red-500">Registration Ends</h3>
-                        <p className="text-white text-xl font-bold mt-1 st-text-glow">15 Jan 2026</p>
+                        <p className="text-white text-xl font-bold mt-1 st-text-glow">20 Jan 2026</p>
                         <p className="text-gray-400 text-sm mt-2">The gate closes.</p>
                     </div>
                 </div>
