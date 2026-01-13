@@ -19,4 +19,8 @@ const nutrientLists = [
   { label: "Innovation", amount: "MAX" },
 ];
 
+const cards = [
+  // Add your team member cards here
+];
+
 export { flavorlists, nutrientLists, cards };
